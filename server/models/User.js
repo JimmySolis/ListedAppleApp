@@ -1,5 +1,5 @@
 const { Schema, model, default: mongoose } = require('mongoose');
-const bcrypt = require('bctypt');
+const bcrypt = require('bcrypt');
 
 
 const userSchema = new Schema({
@@ -19,42 +19,54 @@ const userSchema = new Schema({
         required: true,
         minlength: 6,
     },
-    shirtSize: {
-        type: String,
-        required: true,
-    },
-    shoeSize: {
-        type: String,
-        required: true,
-    },
-    pantsSize: {
-        type: String,
-        required: true,
-    },
-    favColor: {
-        type: String,
-        required: true,
-    },
-    favNameToBeCalled: {
-        type: String,
-        required: true,
-    },
-    favNFLTeam: {
-        type: String,
-        required: true,
-    },
-    favCollegeTeam: {
-        type: String,
-        required: true,
-    },
-    favSoccerTeam: {
-        type: String,
-        required: true,
-    },
-    gender: {
-        type: String,
-        required: true,
-    },
+    info: [
+    {
+        firstName:{
+            type: String,
+            required: true,
+        },
+        lastName:{
+            type: String,
+            required: true,
+        },
+        shirtSize: {
+            type: String,
+            required: true,
+        },
+        shoeSize: {
+            type: String,
+            required: true,
+        },
+        pantsSize: {
+            type: String,
+            required: true,
+        },
+        favColor: {
+            type: String,
+            required: true,
+        },
+        favNameToBeCalled: {
+            type: String,
+            required: true,
+        },
+        favNFLTeam: {
+            type: String,
+            required: true,
+        },
+        favCollegeTeam: {
+            type: String,
+            required: true,
+        },
+        favSoccerTeam: {
+            type: String,
+            required: true,
+        },
+        gender: {
+            type: String,
+            required: true,
+        }
+    }
+    ],
     lists: [
         {
             type: Schema.Types.ObjectId,
