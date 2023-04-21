@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-export default function signUp({ navigation }) {
+export default function login({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -12,13 +12,13 @@ export default function signUp({ navigation }) {
   } 
   
   const pressHandler = () => {
-    navigation.navigate('Login')
+    navigation.navigate('SignUp')
   }
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.text}>Sign Up</Text>
-      <Button title='Go to login' onPress={pressHandler}/>
+      <Text style={styles.text}>Login</Text>
+      <Button title='Go to back to sign up' onPress={pressHandler}/>
      <View style={styles.container}>
      <Text style={styles.header}>Login</Text>
      <TextInput

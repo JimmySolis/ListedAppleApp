@@ -8,10 +8,15 @@ export default function discoveryPage({ navigation }) {
     navigation.navigate('Profile')
   }
 
+  const pressHandlerSearch = () => {
+    navigation.navigate('Search')
+  }
+
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.text}>Hi</Text>
-      <Button title='Go to profile' onPress={pressHandler}/>
+      <Text style={styles.text}>Home</Text>
+      <Button title='Go to Profile' onPress={pressHandler}/>
+      <Button title='Go to Search' onPress={pressHandlerSearch}/>
       
 
     </SafeAreaView>

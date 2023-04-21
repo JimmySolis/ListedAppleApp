@@ -8,10 +8,15 @@ export default function profile({ navigation }) {
     navigation.navigate('Home')
   }
 
+  const pressHandlerSettings = () => {
+    navigation.navigate('Settings')
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.text}>Profile</Text>
       <Button title='Go to Home' onPress={pressHandler}/>
+      <Button title='Go to Settings' onPress={pressHandlerSettings}/>
 
     </SafeAreaView>
   );

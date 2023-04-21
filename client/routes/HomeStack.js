@@ -8,12 +8,6 @@ import login from './pages/login';
 import signUp from './pages/signUp';
 
 const screens ={
-    SignUp : {
-        screen: signUp
-    },
-    Login : {
-        screen: login
-    },
     Home : {
         screen: discoveryPage
     },
@@ -26,7 +20,12 @@ const screens ={
     Settings : {
         screen: userSettings
     },
-  
+    SignUp : {
+        screen: signUp
+    },
+    Login : {
+        screen: login
+    }
 }
 
 const HomeStack = createStackNavigator(screens);
