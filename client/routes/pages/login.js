@@ -1,43 +1,45 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default function login({ navigation }) {
+export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
-  const handleLogin = () => {
-    // Perform login logic
-    console.log(`Logging in with email: ${email} and password: ${password}`);
-  } 
-  
-  const pressHandler = () => {
-    navigation.navigate('SignUp')
-  }
+  const handleEmailChange = (value) => setEmail(value);
+  const handlePasswordChange = (value) => setPassword(value);
+
+  const isFormComplete = email && password;
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.text}>Login</Text>
-      <Button title='Go to back to sign up' onPress={pressHandler}/>
-     <View style={styles.container}>
-     <Text style={styles.header}>Login</Text>
-     <TextInput
-       style={styles.input}
-       placeholder="Email"
-       keyboardType="email-address"
-       value={email}
-       onChangeText={(text) => setEmail(text)}
-     />
-     <TextInput
-       style={styles.input}
-       placeholder="Password"
-       secureTextEntry={true}
-       value={password}
-       onChangeText={(text) => setPassword(text)}
-     />
-     <Button title="Login" onPress={handleLogin} />
-   </View>
-   </SafeAreaView>
+    <View style={styles.container}>
+      <Text style={styles.header}>Listed</Text>
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.input}
+          placeholder="Email"
+          value={email}
+          onChangeText={handleEmailChange}
+          keyboardType="email-address"
+        />
+        <View style={styles.passwordContainer}>
+          <TextInput
+            style={styles.passwordInput}
+            placeholder="Password"
+            value={password}
+            onChangeText={handlePasswordChange}
+            secureTextEntry={!showPassword}
+          />
+          <TouchableOpacity style={styles.passwordIconContainer} onPress={() => setShowPassword(!showPassword)}>
+            <Icon name={showPassword ? 'eye-slash' : 'eye'} size={20} color="#333" />
+          </TouchableOpacity>
+        </View>
+        <TouchableOpacity style={[styles.button, isFormComplete ? {} : styles.disabledButton]} disabled={!isFormComplete}>
+          <Text style={styles.buttonText}>Login</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 }
 
@@ -46,23 +48,53 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  text: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: 'black',
+    backgroundColor: '#fff',
   },
   header: {
-    fontSize: 24,
-    marginBottom: 16,
+    fontSize: 36,
+    fontWeight: 'bold',
+    marginBottom: 40,
+  },
+  inputContainer: {
+    width: '80%',
   },
   input: {
-    height: 40,
-    width: '80%',
     borderWidth: 1,
-    borderColor: 'gray',
+    borderColor: '#333',
     borderRadius: 4,
-    padding: 8,
-    marginBottom: 16,
+    padding: 10,
+    marginBottom: 10,
+  },
+  error: {
+    color: 'red',
+    marginBottom: 10,
+  },
+  button: {
+    backgroundColor: '#3B86C6',
+    padding: 10,
+    borderRadius: 4,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+  },
+  disabledButton: {
+    opacity: 0.1,
+  },
+  passwordContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#333',
+    borderRadius: 4,
+    padding: 10,
+    marginBottom: 10,
+  },
+  passwordInput: {
+    flex: 1,
+  },
+  passwordIconContainer: {
+    marginLeft: 10,
   },
 });

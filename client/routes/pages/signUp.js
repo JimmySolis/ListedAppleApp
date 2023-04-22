@@ -15,9 +15,13 @@ export default function signUp() {
     symbol: false,
     numeric: false,
   });
-  
 
-  const handleEmailChange = (value) => setEmail(value);
+  const validateEmail = (email) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
+  
+  const handleEmailChange = (value) => setEmail(value.trim());
   const handlePasswordChange = (value) => {
     setPassword(value);
     setRequirements({
@@ -27,21 +31,30 @@ export default function signUp() {
       numeric: /\d/.test(value),
     });
   };
+
   const handleConfirmPasswordChange = (value) => setConfirmPassword(value);
 
-  const isFormComplete = email && password && confirmPassword && Object.values(requirements).every(Boolean);
+  const isFormComplete = email && validateEmail(email) &&  password && confirmPassword && Object.values(requirements).every(Boolean);
+
+    const handleSignUp = () => {
+    // Your sign up logic here
+    console.log(`Email: ${email}, Password: ${password}, Confirm Password: ${confirmPassword}`);
+  };
 
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Listed</Text>
       <View style={styles.inputContainer}>
-        <TextInput
+      <TextInput
           style={styles.input}
           placeholder="Email"
           value={email}
           onChangeText={handleEmailChange}
           keyboardType="email-address"
         />
+        {!validateEmail(email) && email ? (
+          <Text style={styles.error}>Invalid email format</Text>
+        ) : null}
         <View style={styles.passwordContainer}>
           <TextInput
             style={styles.passwordInput}
@@ -78,7 +91,7 @@ export default function signUp() {
         ) : requirements.length && requirements.uppercase && requirements.symbol && requirements.numeric && confirmPassword === password ? (
           <Text style={styles.success}>Requirements met!</Text>
         ) : null}
-        <TouchableOpacity style={[styles.button, isFormComplete && password == confirmPassword  ? {} : styles.disabledButton]} disabled={!isFormComplete}>
+        <TouchableOpacity style={[styles.button, isFormComplete && password == confirmPassword  ? {} : styles.disabledButton]} disabled={!isFormComplete} onPress={handleSignUp}>
           <Text style={styles.buttonText}>Sign up</Text>
         </TouchableOpacity>
       </View>
@@ -111,13 +124,17 @@ const styles = StyleSheet.create({
   requirements: {
     flexDirection: 'column',
     marginBottom: 10,
+    marginTop: 5,
   },
   requirement: {
     color: '#999',
+    marginTop: 5,
   },
   requirementCompleted: {
     textDecorationLine: 'line-through',
     color: '#4caf50',
+    marginBottom: 5,
+    marginTop: 5,
   },
   error: {
     color: 'red',
@@ -156,6 +173,11 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
 });
+
+
+// Old code that I may revisit 
+
+
 
 // import React, { useState } from 'react';
 // import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
