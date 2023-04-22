@@ -6,8 +6,18 @@ import profile from './pages/profile';
 import userSettings from './pages/userSettings';
 import login from './pages/login';
 import signUp from './pages/signUp';
+import landingScreen from './pages/landingScreen';
 
 const screens ={
+    LandingScreen : {
+        screen: landingScreen
+    },
+    SignUp : {
+        screen: signUp
+    },
+    Login : {
+        screen: login
+    },
     Home : {
         screen: discoveryPage
     },
@@ -19,12 +29,6 @@ const screens ={
     },
     Settings : {
         screen: userSettings
-    },
-    SignUp : {
-        screen: signUp
-    },
-    Login : {
-        screen: login
     }
 }
 
