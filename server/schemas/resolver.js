@@ -32,10 +32,10 @@ const resolvers = {
     },
 
     Mutation: {
-        addUser: async (parent, { username, email, password }) => {
-            const user = await User.create({ username, email, password });
-            const token = signToken(user);
-            return { token, user };
+        addUser: async (parent, { email, password }) => {
+            const user = await User.create({ email, password });
+            const token = signToken(email);
+            return { token, email };
         },
         login: async ( parent, { email, password }) => {
             const user = await User.findOne({ email });
@@ -108,7 +108,7 @@ const resolvers = {
             if(context.user) {
                 const deletedUser = await User.findOneAndDelete({
                    _id: context.user._id,
-                   username,
+                   email,
                    password 
                 })
             }

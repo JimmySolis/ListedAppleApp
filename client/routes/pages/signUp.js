@@ -1,9 +1,14 @@
-
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default function signUp() {
+import { useMutation } from '@apollo/client';
+import {  MUTATION_SIGNUPUSER } from '../../utils/mutations';
+
+import Auth from '../../utils/auth';
+
+
+export default function signUp( {navigation} ) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -36,10 +41,33 @@ export default function signUp() {
 
   const isFormComplete = email && validateEmail(email) &&  password && confirmPassword && Object.values(requirements).every(Boolean);
 
-    const handleSignUp = () => {
-    // Your sign up logic here
-    console.log(`Email: ${email}, Password: ${password}, Confirm Password: ${confirmPassword}`);
+  const [addUser, { error, data }] = useMutation(MUTATION_SIGNUPUSER);
+
+
+ 
+
+
+    const handleSignUp = async (event) => {
+      
+      event.preventDefault();
+
+      try {
+          const { data } = await addUser({
+              variables: { 
+                email: email, 
+                password: password },
+          }); 
+
+          Auth.login(data.addUser.token);
+          navigation.navigate("Intro")
+      } catch (e) {
+          console.error(e);
+      }
+      console.log(`Email: ${email}, Password: ${password}, Confirm Password: ${confirmPassword}`);
+
   };
+
+  
 
   return (
     <View style={styles.container}>

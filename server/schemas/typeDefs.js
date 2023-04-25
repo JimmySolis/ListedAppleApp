@@ -55,12 +55,12 @@ type Gift {
   }
 
   type Mutation{
-    addUser(username: String!, email: String!, password: String!): Auth
+    addUser(email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     addList(listName: String!): List
     addGift(listId: ID! giftName: String! giftUrl: String!): Gift
     addInfo(firstname: String! lastName: String! shirtSize: String! shoeSize: String! pantsSize: String! favColor: String! favNameToBeCalled: String! favNFLTeam: String! favCollegeTeam: String! favSoccerTeam: String! gender: String!): Info
-    removeUser(username: String!, password: String!): Auth
+    removeUser(email: String!, password: String!): Auth
     removeList(listId: ID!): List
     removeGift(giftId: ID! listId: ID!): Gift
 

@@ -7,6 +7,7 @@ import userSettings from './pages/userSettings';
 import login from './pages/login';
 import signUp from './pages/signUp';
 import landingScreen from './pages/landingScreen';
+import intro from './pages/intro';
 
 const screens ={
     LandingScreen : {
@@ -29,6 +30,9 @@ const screens ={
     },
     Settings : {
         screen: userSettings
+    },
+    Intro : {
+        screen: intro
     }
 }
 
